@@ -2,22 +2,27 @@
 
 import React from 'react'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
+import moment from 'moment'
+import Icon from './Icon'
 
-type Props = {|
+const date = (value) => moment(value).format('D MMMM YYYY').toUpperCase()
+const time = (value) => moment(value).format('HH:mm')
 
-|}
+type Props = {||}
 
 const Entry = ({
-
+  createdAt,
+  score,
+  value,
 }: Props) => (
   <View style={styles.root}>
     <View style={styles.header}>
-      <Text style={styles.date}>16th November 2018</Text>
-      <Text style={styles.time}>13:12</Text>
+      <Text style={styles.date}>{date(createdAt)}</Text>
+      <Text style={styles.time}>{time(createdAt)}</Text>
     </View>
 
     <View style={styles.icon}>
-      <Image source={icons.happy} />
+      <Icon score={score} />
     </View>
 
     <Text style={styles.title}>
@@ -25,14 +30,10 @@ const Entry = ({
     </Text>
 
     <Text style={styles.content} ellipsizeMode="tail">
-      “Brevity is the soul of wit. The soul of wit is what brevity is. Brevity? Soul of wit? They're the same thing. Like if you had brevity in one hand and the soul of wit in the other, you’d be hard pressed to tell them apart.”
+      {value}
     </Text>
   </View>
 )
-
-const icons = {
-  happy: require('../../../../assets/images/happy.png')
-}
 
 const styles = StyleSheet.create({
   root: {

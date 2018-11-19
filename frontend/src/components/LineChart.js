@@ -171,48 +171,34 @@ class LineChart extends AbstractChart {
           width={width}
         >
           <G>
-            {this.renderDefs({
-              ...config,
-              ...this.props.chartConfig
-            })}
-            {this.renderHorizontalLines({
-              ...config,
-              count: 4,
-              paddingTop,
-              paddingRight
-            })}
-            {this.renderVerticalLines({
-              ...config,
-              data: data.datasets[0].data,
-              paddingTop,
-              paddingRight
-            })}
-            {this.renderVerticalLabels({
-              ...config,
-              labels,
-              paddingRight,
-              paddingTop
-            })}
-            {this.renderLine({
-              ...config,
-              paddingRight,
-              paddingTop,
-              // data: data.datasets[0].data
-              data: data.datasets
+            <G>
+              {this.renderHorizontalLines({
+                ...config,
+                count: 4,
+                paddingTop,
+                paddingRight
+              })}
+            </G>
 
-            })}
-            {withShadow && this.renderShadow({
-              ...config,
-              data: data.datasets,
-              paddingRight,
-              paddingTop
-            })}
-            {withDots && this.renderDots({
-              ...config,
-              data: data.datasets,
-              paddingTop,
-              paddingRight
-            })}
+            <G>
+              {this.renderLine({
+                ...config,
+                paddingRight,
+                paddingTop,
+                // data: data.datasets[0].data
+                data: data.datasets
+
+              })}
+            </G>
+
+            <G>
+              {withDots && this.renderDots({
+                ...config,
+                data: data.datasets,
+                paddingTop,
+                paddingRight
+              })}
+            </G>
           </G>
         </Svg>
       </View>

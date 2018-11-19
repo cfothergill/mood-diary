@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Navigation from '../../services/navigation'
 import {
   SAVE_ENTRY,
   SAVE_ENTRY_REQUEST,
@@ -6,9 +7,21 @@ import {
   SAVE_ENTRY_FAILURE
 } from '../actions'
 
+const scores = {
+  euphoric: 6,
+  happy: 5,
+  mildlyhappy: 4,
+  neutral: 3,
+  mildlyunhappy: 2,
+  unhappy: 1,
+  downrightmiserable: 0
+}
+
 const save = () => {
   return (store) => (next) => async (action) => {
-    if (action.type !== SAVE_ENTRY) {
+    const { type, payload: entry } = action
+
+    if (type !== SAVE_ENTRY) {
       return next(action)
     }
 
@@ -16,9 +29,22 @@ const save = () => {
       type: SAVE_ENTRY_REQUEST
     })
 
+    const data = new FormData()
+    data.append('entry', entry)
+
     try {
-      const res = await axios.post('http://localhost:5000', {
-        entry: action.payload
+      const res = await axios.request({
+        url: 'http://localhost:5000',
+        method: 'POST',
+        data
+      })
+
+      store.dispatch({
+        type: SAVE_ENTRY_SUCCESS,
+        payload: {
+          value: entry,
+          score: scores[res.data]
+        }
       })
 
     } catch (err) {
@@ -30,4 +56,4 @@ const save = () => {
   }
 }
 
-const
+export default save

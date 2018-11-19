@@ -23,27 +23,35 @@ const GraphView = ({
       ]}
     />
 
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text style={styles.title}>
         your week
       </Text>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <LineChart
-          width={Math.max(Dimensions.get('window').width, 70 * 7)}
-          height={100}
-          data={{
-            datasets: [{
-              data: [-0.9227, 0.4019, 0.8492, 0.5994, 0.5584, 0.8692, 0.4927]
-            }]
-          }}
-          chartConfig={{
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: { borderRadius: 16, backgroundColor: 'red' }
-          }}
-        />
-      </ScrollView>
+      {scores.length > 0 && (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <LineChart
+            width={Math.max(Dimensions.get('window').width, 70 * 7)}
+            height={120}
+            data={{
+              datasets: [{
+                data: scores
+              }]
+            }}
+            chartConfig={{
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: { borderRadius: 16, backgroundColor: 'red' }
+            }}
+          />
+        </ScrollView>
+      )}
+
+      {scores.length === 0 && (
+        <Text style={styles.placeholder}>
+          you’ll be able to see an overview of your feelings this week here
+        </Text>
+      )}
     </SafeAreaView>
   </View>
 )
@@ -71,6 +79,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     padding: 8,
     marginBottom: 16
+  },
+
+  placeholder: {
+    fontFamily: 'Work Sans',
+    fontSize: 16,
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 120
   }
 })
 

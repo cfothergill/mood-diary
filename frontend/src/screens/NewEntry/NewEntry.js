@@ -2,6 +2,8 @@
 
 import React, { Component, Fragment } from 'react'
 import { View, SafeAreaView } from 'react-native'
+import { connect } from 'react-redux'
+import { saveEntry } from '../../store'
 import * as icons from '../../resources/icons'
 import PrimaryButton from '../../components/PrimaryButton'
 import Box from '../../components/Box'
@@ -12,6 +14,8 @@ import Editor from './components/Editor'
 
 class NewEntry extends Component {
   render() {
+    const { saveEntry, navigation } = this.props
+
     return (
       <Root>
         <Header />
@@ -29,7 +33,10 @@ class NewEntry extends Component {
                   disabled={!config.isValid}
                   title="save this entry"
                   icon={icons.save}
-                  onPress={() => {}}
+                  onPress={() => {
+                    saveEntry(config.value)
+                    navigation.navigate('Home')
+                  }}
                 />
               </Box>
             </Fragment>
@@ -40,4 +47,4 @@ class NewEntry extends Component {
   }
 }
 
-export default NewEntry
+export default connect(undefined, { saveEntry })(NewEntry)

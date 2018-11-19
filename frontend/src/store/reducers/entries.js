@@ -25,11 +25,12 @@ const entries = (state = INITIAL, action) => {
       return {
         ...state,
         saving: false,
-        entries: [...state.entries, {
+        entries: [{
           key: id.generate(),
-          scrore: payload.score,
-          value: payload.value
-        }]
+          score: payload.score,
+          value: payload.value,
+          createdAt: new Date()
+        }, ...state.entries]
       }
 
     default:

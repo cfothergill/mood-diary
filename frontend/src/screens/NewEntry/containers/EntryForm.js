@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react'
+import { connect } from 'react-redux'
 
 class EntryForm extends React.Component {
   state = { value: '' }

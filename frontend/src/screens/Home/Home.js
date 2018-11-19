@@ -2,35 +2,49 @@
 
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList, Dimensions } from 'react-native'
+import { connect } from 'react-redux'
+import { getEntries, getScores } from '../../store'
 import PrimaryButton from '../../components/PrimaryButton'
 import Layout from './components/Layout'
 import GraphView from './components/GraphView'
 import Entry from './components/Entry'
+import Empty from './components/Empty'
 
 type Props = {||}
 
 class Home extends Component<Props> {
   static navigationOptions = { header: null }
 
-  _renderItem = ({ id }) => (
+  _renderItem = ({
+    item: {
+      key,
+      createdAt,
+      score,
+      value
+    }
+  }) => (
     <View
-      key={id}
+      key={key}
       style={{
         width: Dimensions.get('window').width - 48,
         paddingLeft: 8,
         paddingRight: 8,
       }}
     >
-      <Entry />
+      <Entry
+        createdAt={createdAt}
+        score={score}
+        value={value}
+      />
     </View>
   )
 
   render() {
-    const { navigation } = this.props
+    const { navigation, entries, scores } = this.props
 
     return (
       <Layout
-        header={<GraphView />}
+        header={<GraphView scores={scores} />}
         footer={(
           <PrimaryButton
             title="add new entry"
@@ -39,31 +53,30 @@ class Home extends Component<Props> {
           />
         )}
       >
-        <FlatList
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          style={{
-            overflow: 'visible',
-            marginTop: -36,
-            marginBottom: 36,
-          }}
-          data={[
-            { key: '1' },
-            { key: '2' },
-            { key: '3' },
-            { key: '4' },
-            { key: '5' },
-            { key: '6' },
-            { key: '7' },
-            { key: '8' },
-            { key: '9' }
-          ]}
-          renderItem={this._renderItem}
-        />
+        {scores.length > 0 ? (
+          <FlatList
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            style={{
+              overflow: 'visible',
+              marginTop: -36,
+              marginBottom: 36,
+            }}
+            data={entries}
+            renderItem={this._renderItem}
+          />
+        ) : (
+          <Empty />
+        )}
       </Layout>
     )
   }
 }
 
-export default Home
+export default connect(
+  state => ({
+    entries: getEntries(state),
+    scores: getScores(state)
+  })
+)(Home)
