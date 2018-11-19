@@ -11,20 +11,20 @@ def index():
     nlInput = request.form["entry"]
     ss = sid.polarity_scores(nlInput)
     for compound, v in dict.items(ss):
-        if ss['compound'] >=0.90:
-            return("euphoric")
+        if ss['compound'] >=0.75:
+            return jsonify('Feeling amazing',6)
         elif ss['compound'] >=0.50:
-            return("happy")
+            return jsonify('Feeling very happy',5)
         elif ss['compound'] >=0.25:
-            return("mildlyhappy")   
+            return jsonify('Feeling good',4)
         elif ss['compound'] >=-0.25:
-            return("neutral")   
+            return jsonify('feeling nothing',3)
         elif ss['compound'] >=-0.50:
-            return("mildlyunhappy")
+            return jsonify('Feeling sad',2)
         elif ss['compound'] >=-0.75:
-            return("unhappy")   
+            return jsonify('Feeling very sad', 1)
         elif ss['compound'] >=-1:
-            return("downrightmiserable")   
+            return jsonify('Feeling very sad', 0) 
         break
    
 
