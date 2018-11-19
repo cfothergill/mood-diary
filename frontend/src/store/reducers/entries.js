@@ -29,7 +29,8 @@ const entries = (state = INITIAL, action) => {
           key: id.generate(),
           score: payload.score,
           value: payload.value,
-          createdAt: new Date()
+          createdAt: new Date(),
+          title: payload.title
         }, ...state.entries]
       }
 

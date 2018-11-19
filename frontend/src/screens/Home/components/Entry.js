@@ -14,6 +14,7 @@ const Entry = ({
   createdAt,
   score,
   value,
+  title,
 }: Props) => (
   <View style={styles.root}>
     <View style={styles.header}>
@@ -26,7 +27,7 @@ const Entry = ({
     </View>
 
     <Text style={styles.title}>
-      feeling very happy
+      {title}
     </Text>
 
     <Text style={styles.content} ellipsizeMode="tail">

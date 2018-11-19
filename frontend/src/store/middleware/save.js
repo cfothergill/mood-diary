@@ -34,16 +34,19 @@ const save = () => {
 
     try {
       const res = await axios.request({
-        url: 'http://localhost:5000',
+        url: 'http://10.10.128.160:5000',
         method: 'POST',
         data
       })
+
+      console.log(res.data)
 
       store.dispatch({
         type: SAVE_ENTRY_SUCCESS,
         payload: {
           value: entry,
-          score: scores[res.data]
+          score: res.data[1],
+          title: res.data[0]
         }
       })
 

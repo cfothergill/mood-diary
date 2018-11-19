@@ -20,7 +20,8 @@ class Home extends Component<Props> {
       key,
       createdAt,
       score,
-      value
+      value,
+      title
     }
   }) => (
     <View
@@ -35,6 +36,7 @@ class Home extends Component<Props> {
         createdAt={createdAt}
         score={score}
         value={value}
+        title={title}
       />
     </View>
   )
