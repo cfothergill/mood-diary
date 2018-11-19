@@ -1,7 +1,8 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList } from 'react-native'
+import { View, StyleSheet, FlatList, Dimensions } from 'react-native'
+import PrimaryButton from '../../components/PrimaryButton'
 import Layout from './components/Layout'
 import GraphView from './components/GraphView'
 import Entry from './components/Entry'
@@ -12,21 +13,41 @@ class Home extends Component<Props> {
   static navigationOptions = { header: null }
 
   _renderItem = ({ id }) => (
-    <Entry key={id} />
+    <View
+      key={id}
+      style={{
+        width: Dimensions.get('window').width - 48,
+        paddingLeft: 8,
+        paddingRight: 8,
+      }}
+    >
+      <Entry />
+    </View>
   )
 
   render() {
+    const { navigation } = this.props
+
     return (
       <Layout
         header={<GraphView />}
-        footer={<View style={{ backgroundColor: 'transparent' }} />}
+        footer={(
+          <PrimaryButton
+            title="add new entry"
+            icon={require('../../../assets/images/add-icon.png')}
+            onPress={() => navigation.navigate('NewEntry')}
+          />
+        )}
       >
         <FlatList
           horizontal
           pagingEnabled
-          decelerationRate={0}
-          snapToInterval={300} //your element width
-          snapToAlignment={"center"}
+          showsHorizontalScrollIndicator={false}
+          style={{
+            overflow: 'visible',
+            marginTop: -36,
+            marginBottom: 36,
+          }}
           data={[
             { key: '1' },
             { key: '2' },

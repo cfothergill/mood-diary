@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, SafeAreaView } from 'react-native'
 
 type Props = {|
   +header: React.Node,
@@ -17,15 +17,17 @@ const Layout = ({
   <View style={styles.root}>
     <View style={styles.header}>{header}</View>
     <View style={styles.content}>{children}</View>
-    <View style={styles.footer}>{footer}</View>
+    <SafeAreaView>
+      <View style={styles.footer}>{footer}</View>
+    </SafeAreaView>
   </View>
 )
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  header: { height: '36%', backgroundColor: 'red' },
-  content: { flex: 1, backgroundColor: '#e5e5e5' },
-  footer: { height: 64, backgroundColor: 'green' }
+  header: { height: '36%' },
+  content: { flex: 1, paddingLeft: 24, paddingRight: 24 },
+  footer: { height: 64, paddingLeft: 16, paddingRight: 16 }
 })
 
 export default Layout

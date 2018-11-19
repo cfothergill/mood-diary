@@ -10,11 +10,21 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, StatusBar } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Home from './src/screens/Home'
+import NewEntry from './src/screens/NewEntry'
 
 StatusBar.setBarStyle('light-content')
 
-const AppNavigator = createStackNavigator({
+const MainStack = createStackNavigator({
   Home: Home,
 })
 
-export default createAppContainer(AppNavigator)
+const RootStack = createStackNavigator({
+  Main: MainStack,
+  NewEntry: NewEntry,
+}, {
+  mode: 'modal',
+  headerMode: 'none',
+  transparentCard: true
+})
+
+export default createAppContainer(RootStack)

@@ -8,6 +8,8 @@
     "flow": "flow"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "moment": "^2.22.2",
     "react": "16.6.1",
     "react-native": "0.57.5",
     "react-native-chart-kit": "^1.2.0",
@@ -19,7 +21,8 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "shortid": "^2.2.14"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
@@ -33,7 +36,7 @@
   },
   "rnpm": {
     "assets": [
-	     "./assets/fonts/"
+      "./assets/fonts/"
     ]
   }
 }

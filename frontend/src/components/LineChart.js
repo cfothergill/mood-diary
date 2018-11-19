@@ -156,7 +156,7 @@ class LineChart extends AbstractChart {
 
   render() {
     const paddingTop = 16
-    const paddingRight = 8
+    const paddingRight = 16
     const { width, height, data, withShadow = true, withDots = true, style = {} } = this.props
     const { labels = [] } = data
     const { borderRadius = 0 } = style

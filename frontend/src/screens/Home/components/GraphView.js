@@ -28,7 +28,7 @@ const GraphView = ({
         your week
       </Text>
 
-      <ScrollView horizontal>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <LineChart
           width={Math.max(Dimensions.get('window').width, 70 * 7)}
           height={100}
@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     color: '#fff',
-    padding: 8
+    padding: 8,
+    marginBottom: 16
   }
 })
 

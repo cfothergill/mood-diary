@@ -16,13 +16,15 @@ const Entry = ({
       <Text style={styles.time}>13:12</Text>
     </View>
 
-    <Image style={styles.icon} source={icons.happy} />
+    <View style={styles.icon}>
+      <Image source={icons.happy} />
+    </View>
 
     <Text style={styles.title}>
       feeling very happy
     </Text>
 
-    <Text style={styles.content}>
+    <Text style={styles.content} ellipsizeMode="tail">
       “Brevity is the soul of wit. The soul of wit is what brevity is. Brevity? Soul of wit? They're the same thing. Like if you had brevity in one hand and the soul of wit in the other, you’d be hard pressed to tell them apart.”
     </Text>
   </View>
@@ -37,9 +39,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     alignItems: 'center',
-    width: 300,
     backgroundColor: '#fff',
-    borderRadius: 8
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+    	height: 8,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 32,
+    elevation: 10
   },
 
   header: {
@@ -47,23 +56,42 @@ const styles = StyleSheet.create({
   },
 
   date: {
-
+    width: '75%',
+    fontFamily: 'Work Sans',
+    fontSize: 12,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    color: '#4F545A'
   },
 
   time: {
-
+    width: '25%',
+    fontFamily: 'Work Sans',
+    fontSize: 12,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    textAlign: 'right',
+    color: '#4F545A'
   },
 
   icon: {
-
+    padding: 32
   },
 
   title: {
-
+    fontFamily: 'Work Sans',
+    fontSize: 24,
+    color: '#4ECDC4',
+    textAlign: 'center',
+    marginBottom: 16
   },
 
   content: {
-
+    flex: 1,
+    fontFamily: 'Work Sans',
+    fontSize: 14,
+    color: '#888B8F',
+    lineHeight: 20
   }
 })
 
